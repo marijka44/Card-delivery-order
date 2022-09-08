@@ -20,10 +20,6 @@ public class DeliveryOrderTest {
         WebDriverManager.chromedriver().setup();
     }
 
-//    @BeforeEach
-//    public void setUp() {
-//        gradlew test -Dselenide.headless=true
-//    }
 
     @Test
     void test1() {
