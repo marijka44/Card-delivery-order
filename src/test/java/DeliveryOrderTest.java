@@ -15,11 +15,19 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.Keys.BACK_SPACE;
 
 public class DeliveryOrderTest {
+    @BeforeAll
+    static void setUpAll() {
+        WebDriverManager.chromedriver().setup();
+    }
 
-
+//    @BeforeEach
+//    public void setUp() {
+//        gradlew test -Dselenide.headless=true
+//    }
 
     @Test
     void test1() {
+
         Configuration.holdBrowserOpen = true;
 
         open("http://localhost:9999");
