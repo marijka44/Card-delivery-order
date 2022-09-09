@@ -16,3 +16,7 @@ build_script:
   # запускаем тест, флаг --info позволяет выводить больше информации
   - chmod +x gradlew
   - ./gradlew test --info "-Dselenide.headless=true"
+
+
+#    - chmod +x gradlew
+#    - ./gradlew test --info "-Dselenide.headless=true""

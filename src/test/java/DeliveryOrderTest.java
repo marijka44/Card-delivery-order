@@ -19,7 +19,9 @@ public class DeliveryOrderTest {
     static void setUpAll() {
         WebDriverManager.chromedriver().setup();
     }
-
+    public String generateDate(int days) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.uuuu"));
+    }
 
     @Test
     void test1() {
@@ -28,19 +30,15 @@ public class DeliveryOrderTest {
 
         open("http://localhost:9999");
 
-        LocalDate date = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd.MM.uuuu");
-        String formattedDate = date.format(formatters);
-
         $("span[data-test-id='city'] input").sendKeys("Новосибирск");
         $("[data-test-id=date] .input__control").sendKeys(Keys.CONTROL + "A");
         $("[data-test-id=date] .input__control").sendKeys(BACK_SPACE);
-        $("[data-test-id=date] .input__control").sendKeys(formattedDate);
+        $("[data-test-id=date] .input__control").sendKeys(generateDate(3));
         $("span[data-test-id='name'] input").sendKeys("Иванов Иван");
         $("span[data-test-id='phone'] input").sendKeys("+79991234567");
         $("label[data-test-id='agreement']").click();
         $x("//*[text()='Забронировать']").click();
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(15));
-        $("[data-test-id=notification] [class='notification__content']").shouldHave(exactText("Встреча успешно забронирована на " + formattedDate));
+        $("[data-test-id=notification] [class='notification__content']").shouldHave(exactText("Встреча успешно забронирована на " + generateDate(3)));
     }
 }
